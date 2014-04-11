@@ -1,4 +1,4 @@
 IP_tool
 =======
 
-Networking IP aid
+Command line tool for IPv4 calculations.

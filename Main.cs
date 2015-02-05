@@ -39,11 +39,14 @@ namespace Grundforloeb_projekt
             string[] tempIP = ip.Split('/');
             slash = Convert.ToInt32(tempIP[1]);
             string[] tempIP2 = tempIP[0].Split('.');
+            
             for (int i = 0; i < 4; i++)
             {
                 ipDecimal[i] = Convert.ToInt32(tempIP2[i]);
             }
-            //## Converts IP to 32 Bits Array ##            
+            
+            // ## Converts IP to 32 Bits Array ##            
+            
             for (int i = 0; i < 4; i++)
             {
                 tempStringArray[i] = ToBin(ipDecimal[i]);
@@ -52,16 +55,22 @@ namespace Grundforloeb_projekt
             char[] r = tempString.ToCharArray();
             for (int i = 0; i < 32; i++) tempStringArray[i] = Convert.ToString(r[i]);
             for (int i = 0; i < 32; i++) ipBinary[i] = Convert.ToInt32(tempStringArray[i]);
-            //## Populating array broadcast ##
+            
+            // ## Populating array broadcast ##
+            
             for (int i = 0; i < 32; i++) broadcastAddress[i] = 0;
-            //## Calculate SubnetMask Binary According to slash '/' ##
+            
+            // ## Calculate SubnetMask Binary According to slash '/' ##
+            
             for (int i = 0; i <= slash; i++) subnetBinary[i] = 1;
             for (int i = slash; i < 32; i++)
             {
                 subnetBinary[i] = 0;
                 broadcastAddress[i] = 1;
             }
-            //## And'ing Ip and Subnetmask to get IP address##
+            
+            // ## Add Ip and Subnetmask to get IP address ##
+            
             for (int i = 0; i < 32; i++)
             {
                 if (subnetBinary[i] == 1 & ipBinary[i] == 1)
@@ -100,12 +109,17 @@ namespace Grundforloeb_projekt
                 }
                 broadcastDecimal[i] = ToDec(temp8);
             }
-            //## Display IP,networkmask,network address,first available host,last available host and broadcast address##
+             
+            // ## Frame position ##
+            
             x = 4;
             y = 7;
             frame(x, y, 70, 12);
             x = x + 2;
             Console.SetCursorPosition(x, y + 1);
+            
+            // ## Print info ##
+            
             Console.Write("IP Address: {0}.{1}.{2}.{3}/{4}", ipDecimal[0], ipDecimal[1], ipDecimal[2], ipDecimal[3], slash);
             Console.SetCursorPosition(x + 32, y + 1);
             Console.Write("{0}.{1}.{2}.{3}", ToBin(ipDecimal[0]), ToBin(ipDecimal[1]), ToBin(ipDecimal[2]), ToBin(ipDecimal[3]));
@@ -134,7 +148,10 @@ namespace Grundforloeb_projekt
             Console.Read();
 
         }
-        static void frame(int x, int y, int width, int high)                //################# Frame Function ################
+        
+        // ## Frame ##
+        
+        static void frame(int x, int y, int width, int high)
         {
             int a, b;
             a = x + width;
@@ -162,7 +179,10 @@ namespace Grundforloeb_projekt
                 Console.Write("║");
             }
         }
-        static int ToDec(int[] a)                                 //########### Binary to Decimal Function 'ToDec' ###############
+        
+        // ## Binary to Decimal ##
+        
+        static int ToDec(int[] a)
         {
             int[] bin = a;
             int[] bits = new int[8];
@@ -180,7 +200,10 @@ namespace Grundforloeb_projekt
             }
             return result;
         }
-        static string ToBin(int a)                           // ## Function to convert from Decimal to Binary ##
+        
+        // ## Decimal to Binary ##
+        
+        static string ToBin(int a)
         {
             int decTemp;
             int[] dec = new int[4];
